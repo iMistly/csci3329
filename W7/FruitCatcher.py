@@ -1,4 +1,5 @@
 import pygame as pg
+from EventHandler import *
 
 pg.init()
 
@@ -7,10 +8,10 @@ disp.fill((200,200,200))
 
 mainClock = pg.time.Clock()
 
+handler = EventHandler(disp)
+
 while True:
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            exit()
+    handler.listen(pg.event.get())
     
     mainClock.tick(60)
     pg.display.update()
