@@ -4,17 +4,19 @@ class EventHandler:
         self.window = window
         
     def listen(self, events) -> None:
-        keys = pg.key.get_pressed()
+        left, right = 0, 0
         
         #Event capture
         for event in events:
             if event.type == pg.QUIT:
+                pg.quit()
                 exit()
-        
-        #Input capture
-        if keys[pg.K_LEFT]:
-            print("Left")
-        if keys[pg.K_RIGHT]:
-            print("Right")
-        if pg.mouse.get_focused() and pg.mouse.get_rel() != (0,0):
-            print(pg.mouse.get_pos())
+            elif event.type == pg.KEYDOWN:
+                if event.key in (pg.K_LEFT, pg.K_a):
+                    print("Left")
+                elif event.key in (pg.K_RIGHT, pg.K_d):
+                    print("Right")
+            elif event.type == pg.MOUSEMOTION:
+                x, y = event.pos
+                print(f"x: {x}\ty: {y}")
+                
